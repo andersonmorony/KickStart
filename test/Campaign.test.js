@@ -35,9 +35,9 @@ beforeEach( async () => {
 });
 
 describe('Campaign', () => {
-    it('should had a campaign contract', () => {
-        console.log(campaign.options.address);
+    it('should had a campaign contract and factory', () => {
         assert.ok(campaign.options.address);
+        assert.ok(Factory.options.address);
     });
 
     it('should have a contribution', async () => {
@@ -45,8 +45,9 @@ describe('Campaign', () => {
             from: accounts[0],
             value: '110'
         });
-
+        const isApprovals = await campaign.methods.approvels(accounts[0]).call();
         const countApprovals = await campaign.methods.countApprovels().call();
+        assert(isApprovals)
         assert.equal(countApprovals, 1);
     });
 
@@ -66,13 +67,41 @@ describe('Campaign', () => {
     });
 
     it('should create new request', async () => {
-        await campaign.methods.createRequest("Description", 400, accounts[0])
-            .send({ from: accounts[0], gas: 1000000});
+        await campaign.methods
+            .createRequest('Description', '400', accounts[1])
+            .send({
+                 from: accounts[0], 
+                 gas: '1000000'
+            });
 
-        let request = await campaign.methods.requests(accounts[0]).call();
+        let request = await campaign.methods.requests(0).call();
 
-        console.log(request);
+        assert.equal(request.description, 'Description');
+        assert.equal(request.value, 400);
+        assert.equal(request.recipient, accounts[1]);
+        assert.equal(request.complete, false);
+        assert.equal(request.CountApprovels, 0)
 
     });
 
+    it('should approval request', async () => {
+       
+        await campaign.methods.contribute().send({
+            from: accounts[0],
+            value: '110'
+        });
+        await campaign.methods
+        .createRequest('Description', '400', accounts[1])
+        .send({
+             from: accounts[0], 
+             gas: '1000000'
+        });
+        await campaign.methods.approvalRequest(0).send({
+            from: accounts[0]
+        });
+        let request = await campaign.methods.requests(0).call();
+
+        
+        assert.equal(request.CountApprovels, 1);
+    });
 });
