@@ -1,0 +1,19 @@
+.container
+{
+    background-color: aliceblue;
+    height: 85vh;
+
+}
+.container form{
+    width: 40vw;
+
+    margin: 0 auto;
+    padding:30px;
+    
+
+}
+
+.container button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
