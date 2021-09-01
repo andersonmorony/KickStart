@@ -1,14 +1,16 @@
 .container
 {
-    background-color: aliceblue;
-    height: 85vh;
+    background-color: #35384c;
+    color: #fff;
+    height: 80vh;    
+    border-left: 2px #0dcaf0  solid;
 
 }
 .container form{
     width: 40vw;
-
     margin: 0 auto;
     padding:30px;
+    padding-top: 100px;
     
 
 }

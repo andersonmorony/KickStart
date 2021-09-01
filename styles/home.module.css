@@ -1,0 +1,42 @@
+.content{
+    width: 90vw;
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    color: #fff;
+}
+
+.customGrid{
+    word-wrap: break-word;
+    word-break: normal;
+    flex: inherit;
+}
+
+.box{
+    text-align: center;
+}
+.box h1{
+    padding-top: 20px;
+    font-size: 3rem;
+    color: #3edb9c;
+}
+.box h3{
+    padding: 10px;
+    padding-bottom: 40px;
+    font-size: 1.3rem;
+    font-weight: 100;
+}
+
+.campaigns{
+    margin-top:100px
+}
+
+.customCards{
+    color: #fff;
+    background-color: #35384c
+}
+
+.customCards p{
+    color: #fff;
+}

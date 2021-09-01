@@ -49,8 +49,8 @@ class NewCampaign extends Component {
                         </div>
                         <div className="d-grid col-12 mx-auto">
                             {this.state.disabled ? 
-                                <button className="btn btn btn-primary" disabled type="submit">Creating....</button>
-                                :<button className="btn btn btn-primary"  type="submit">Create new campaign </button>}
+                                <button className="btn btn btn-info" disabled type="submit">Creating....</button>
+                                :<button className="btn btn btn-info"  type="submit">Create new campaign </button>}
                             
                         </div>
                     </form>
