@@ -1,9 +1,11 @@
-import React, { Component } from "react"
+import react, { Component } from "react"
+import { useRouter } from 'next/router'
 import campaign from "../../../ethereum/campaign"
 import web3 from '../../../ethereum/web3'
 import Layout from "../../../components/Layout"
 
 import styles from "./styles.module.css"
+import CreateRequests from '../../../components/CreateRequests'
 
 class Campaign extends Component {
 
@@ -33,7 +35,7 @@ class Campaign extends Component {
         
         await campaign(this.props.address).methods.contribute().send({
             from: account[0],
-            value: this.state.valueContributed
+            value: web3.utils.toWei(this.state.valueContributed, 'ether')
         });
         
         this.setState({disabled: false, message:'Contribution made with success', messageType: 'alert-success'});
@@ -50,43 +52,43 @@ class Campaign extends Component {
       <Layout>
         <div className={`container ${styles.container}`}>
             
-          <div class={`alert alert-info ${styles.alert}`} role="alert">
+          <div className={`alert alert-info ${styles.alert}`} role="alert">
             <strong>Manager of this contract:</strong> {this.props.manager}
           </div>
           
-          <div class="row">
-            <div class="col-sm-3">
-              <div class={`card ${styles.card}`}>
-                <div class="card-body">
-                  <h5 class="card-title">Minimum Contribution (Wei)</h5>
-                  <h3 class="card-text">{this.props.minimumContribution}</h3>
+          <div className="row">
+            <div className="col-sm-3">
+              <div className={`card ${styles.card}`}>
+                <div className="card-body">
+                  <h5 className="card-title">Minimum Contribution (Wei)</h5>
+                  <h3 className="card-text">{this.props.minimumContribution}</h3>
                   <p>You must contribute at least this much wei to become an approvers.</p>
                 </div>
               </div>
             </div>
-            <div class="col-sm-3">
-              <div class={`card ${styles.card}`}>
-                <div class="card-body">
-                  <h5 class="card-title">Balance  (Ether)</h5>
-                  <h4 class="card-text">{web3.utils.fromWei(this.props.balance, 'ether')}</h4>
+            <div className="col-sm-3">
+              <div className={`card ${styles.card}`}>
+                <div className="card-body">
+                  <h5 className="card-title">Balance  (Ether)</h5>
+                  <h4 className="card-text">{web3.utils.fromWei(this.props.balance, 'ether')}</h4>
                   <p>This balance is how much money this campaign has left to spend.</p>
                 </div>
               </div>
             </div>
-            <div class="col-sm-3">
-              <div class={`card ${styles.card}`}>
-                <div class="card-body">
-                  <h5 class="card-title">Requests</h5>
-                  <h3 class="card-text">{this.props.requestsCount}</h3>
+            <div className="col-sm-3">
+              <div className={`card ${styles.card}`}>
+                <div className="card-body">
+                  <h5 className="card-title">Requests</h5>
+                  <h3 className="card-text">{this.props.requestsCount}</h3>
                   <p>A request tries to withdraw money from the contract. Requests much be approved by approvers.</p>
                 </div>
               </div>
             </div>
-            <div class="col-sm-3">
-              <div class={`card ${styles.card}`}>
-                <div class="card-body">
-                  <h5 class="card-title">Approval</h5>
-                  <h3 class="card-text">{this.props.approvalCount}</h3>
+            <div className="col-sm-3">
+              <div className={`card ${styles.card}`}>
+                <div className="card-body">
+                  <h5 className="card-title">Approval</h5>
+                  <h3 className="card-text">{this.props.approvalCount}</h3>
                   <p>How much of people that already have contribution.</p>
                 </div>
               </div>
@@ -105,11 +107,14 @@ class Campaign extends Component {
                           
                       </div>
                       {this.state.showMessage 
-                      ? <div class={`alert ${this.state.messageType} ${styles.alert}`} role="alert">
+                      ? <div className={`alert ${this.state.messageType} ${styles.alert}`} role="alert">
                         {this.state.message} 
                        </div>
                        : '' }
                   </form>
+              </div>
+              <div className="col-md-5">
+                <CreateRequests address={this.props.address}/>
               </div>              
           </div>
         </div>

@@ -1,0 +1,30 @@
+.container {
+  background-color: #35384c;
+  color: #fff;
+  height: 80vh;
+  border-left: 2px #0dcaf0 solid;
+}
+.container form {
+  width: 40vw;
+  margin: 0 auto;
+  padding: 30px;
+  padding-top: 100px;
+}
+
+.container label {
+  margin-top: 15px;
+}
+
+.container button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.msgError{
+    color: #fc5486;
+    font-weight: bold;
+}
+
+.back{
+    padding-left: 10px;
+}
